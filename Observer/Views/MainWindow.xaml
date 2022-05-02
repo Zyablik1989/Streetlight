@@ -4,16 +4,24 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Observer"
-        xmlns:converters="clr-namespace:Observer.Core.Converters"
+                xmlns:converters="clr-namespace:Observer.Core.Converters"
+        xmlns:vm="clr-namespace:Observer.ViewModels"
         xmlns:views="clr-namespace:Observer.Views"
         mc:Ignorable="d"
+        DataContext="{DynamicResource MainWindowViewModel}"
         Title="Steet light observer" Height="300" Width="800" ResizeMode="NoResize">
     <Window.Resources>
         <converters:BoolToStreetLightColor x:Key="BoolToStreetLightColor" />
+        <vm:MainWindowViewModel x:Key="MainWindowViewModel"/>
     </Window.Resources>
     <Grid>
-        
-        <Grid Margin="0,0,602,0">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="9*"/>
+            </Grid.ColumnDefinitions>
+ 
+        <Grid Grid.Column="0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="0.7*"/>
                 <RowDefinition Height="0.5*"/>
@@ -41,6 +49,7 @@
                 <TextBlock Grid.Row="2" Grid.Column="0" Text="{Binding InitialNumber, FallbackValue=9, Mode=OneWay}" HorizontalAlignment="Center"  VerticalAlignment="Center"/>
                 <TextBlock Grid.Row="1" Grid.Column="1" Text="Subtype" HorizontalAlignment="Center"  VerticalAlignment="Center"/>
                 <TextBlock  Grid.Row="2" Grid.Column="1" FontSize="8" Text="{Binding Subtype, FallbackValue='Default', Mode=OneWay}" HorizontalAlignment="Center"  VerticalAlignment="Center"/>
+                
             </Grid>
 
             
@@ -66,10 +75,26 @@
             </Viewbox>
             
         </Grid>
-        <Grid Margin="198,0,0,0">
-            
+        <Grid Grid.Column="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="0.7*"/>
+                <ColumnDefinition Width="0.3*"/>
+                <ColumnDefinition Width="0.3*"/>
+                </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="10*"/>
+            </Grid.RowDefinitions>
+            <TextBlock Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center" Text="ENTER ADDRESS FOR STREET LIGHT SERVER"/>
+                <TextBox Grid.Column="1" VerticalAlignment="Center" Text="{Binding ServerAddress, FallbackValue='http://localhost:5000', TargetNullValue='http://localhost:5000'}" HorizontalAlignment="Stretch"/>
+                <Button Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center" Content="CONNECT" Command="{Binding ConnectToAnalisysServerCommand}"/>
+                <Button Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Center" Content="CLEAR" Command="{Binding OrderToClearAnalisysServerCommand}"/>
+                <ListBox Grid.Row="1" Grid.ColumnSpan="4" ItemsSource="{Binding ServerMessages}"/>
+
+
+            </Grid>
+
         </Grid>
-
-
     </Grid>
 </Window>

@@ -20,7 +20,7 @@ namespace Streetlight
             {
                 if (i == 0)
                 {
-                    badSegmentIndex = (byte)new Random().Next(6);
+                    badSegmentIndex = (byte)new Random().Next(7);
                     ListOfBadSegmentsIndexes.Add(badSegmentIndex);
                     previousBadSegmentIndex = badSegmentIndex;
                 }
@@ -28,7 +28,7 @@ namespace Streetlight
                 {
                     do
                     {
-                        badSegmentIndex = (byte)new Random().Next(6);
+                        badSegmentIndex = (byte)new Random().Next(7);
                     }
                     while (previousBadSegmentIndex == numberOfBadSegments);
 
@@ -40,7 +40,6 @@ namespace Streetlight
         public override List<byte> ResolveNumberIntoDigitScheme(int number)
         {
             base.ResolveNumberIntoDigitScheme(number);
-
 
             List<byte> ListOfBadSchemes = new List<byte>();
             foreach (var goodScheme in DigitsSegmentsScheme)

@@ -18,6 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\RestSharpManager\RestSharpManager.csproj" />
     <ProjectReference Include="..\StreetLightManager\StreetlightManager.csproj" />
   </ItemGroup>
 

@@ -1,15 +1,50 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
+using System.Windows.Threading;
 using Observer.Core;
 
 namespace Observer.ViewModels
 {
     public class MainWindowViewModel : ObservableObject
     {
+        private ObservableCollection<string> serverMessages;
+
+        public ObservableCollection<string> ServerMessages
+        {
+            get { return serverMessages; }
+            set
+            {
+                if (value != serverMessages)
+                {
+                    serverMessages = value;
+                }
+
+                OnPropertyChanged();
+            }
+        }
+
         bool isInvokingNewStreetlightInProgress = false;
+
+        private string serverAddress = "http://localhost:5000";
+
+        public string ServerAddress
+        {
+            get { return serverAddress; }
+            set
+            {
+                if (value != serverAddress)
+                {
+                    serverAddress = value;
+                }
+
+                OnPropertyChanged();
+            }
+        }
 
         private int streetlightSecondsLeft;
 
@@ -83,15 +118,30 @@ namespace Observer.ViewModels
                 OnPropertyChanged();
             }
         }
+        
+        public RelayCommand ConnectToAnalisysServerCommand { get; set; }
 
+        public RelayCommand OrderToClearAnalisysServerCommand { get; set; }
+        
         public RelayCommand InvokeNewStreetlightCommand { get; set; }
 
         public MainWindowViewModel()
         {
+            ServerMessages = new ObservableCollection<string>();
             InvokeNewStreetlightCommand = new RelayCommand(async o => { await ExecuteInvokeNewStreetlight(); },
                 o => CanExecuteInvokeNewStreetlight());
-        }
 
+            ConnectToAnalisysServerCommand = new RelayCommand(async o => { await ExecuteConnectToAnalisysServer(); });
+            OrderToClearAnalisysServerCommand = new RelayCommand(async o => { await ExecuteOrderToClearAnalisysServer(); });
+        }
+        private bool CanExecuteInvokeNewStreetlight()
+        {
+            if (isInvokingNewStreetlightInProgress)
+            {
+                return false;
+            }
+            return true;
+        }
         private async Task ExecuteInvokeNewStreetlight()
         {
             lock (this)
@@ -106,14 +156,39 @@ namespace Observer.ViewModels
             }
         }
 
-        private bool CanExecuteInvokeNewStreetlight()
+        private async Task ExecuteConnectToAnalisysServer()
         {
-            if (isInvokingNewStreetlightInProgress)
-            {
-                return false;
-            }
-            return true;
+            
+
+            ServerMessages.Add("777");
+                await Task.Run(
+                             () =>
+                             {
+                                 Thread.Sleep(500);
+                             });
+                ServerMessages.Add("666");
+            await Task.Run(
+                 () =>
+                 {
+                     Thread.Sleep(100);
+                 });
+
+
         }
+
+        private async Task ExecuteOrderToClearAnalisysServer()
+        {
+            await Task.Run(
+                 () =>
+                 {
+                     RestSharpManager.RestSharpManager.Current.ClearServerData(ServerAddress);
+
+                 });
+            //ServerMessages.Clear();
+
+
+        }
+        
 
         internal void UpdateUI()
         {
@@ -148,6 +223,11 @@ namespace Observer.ViewModels
         public void UpdateColor()
         {
             UpdateUI();
+        }
+
+        public void AddMessage(string message)
+        {
+            ServerMessages.Add(message);
         }
 
 

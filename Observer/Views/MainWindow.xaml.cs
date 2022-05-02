@@ -26,7 +26,7 @@ namespace Observer.Views
         public MainWindow()
         {
             InitializeComponent();
-            DataContext = new MainWindowViewModel();
+            //DataContext = new MainWindowViewModel();
             StreetLightManager.StreetlightManager.Start();
             StreetLightManager.StreetlightManager.DigitsChanged += async () =>
             {
@@ -45,6 +45,17 @@ namespace Observer.Views
                 }));
 
             };
+
+            RestSharpManager.RestSharpManager.ExternalMessage += async (string s) =>
+            {
+                await Dispatcher.BeginInvoke(new ThreadStart(delegate
+                {
+                    (DataContext as MainWindowViewModel)?.AddMessage(s);
+                }));
+
+            };
+
+            
         }
     }
 }

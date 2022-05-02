@@ -66,7 +66,10 @@ namespace StreetLightManager
 
             lock (Sync)
             { 
-                streetlight = StreetlightFactory.CreateStreetlight(); 
+                streetlight = StreetlightFactory.CreateStreetlight();
+                SecondsLeft = streetlight.InitialNumber;
+                LightIsGreen = false;
+
             }
             
 
@@ -98,15 +101,12 @@ namespace StreetLightManager
                 }
 
 
-
                 DigitsSegmentsScheme = streetlight?.ResolveNumberIntoDigitScheme(SecondsLeft);
 
                 if (!(streetlight is StreetlightIdleWhileRed) || LightIsGreen)
                 {
                     DigitsChanged?.Invoke();
                 }
-
-                
 
                 await Task.Run(
                              () =>
@@ -115,8 +115,5 @@ namespace StreetLightManager
                              });
             }
         }
-
-
-
     }
 }

@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Net;
 using Newtonsoft.Json;
 using RestSharp;
+using StreetlightExchange;
 
 namespace RestSharpManager
 {
@@ -29,10 +30,13 @@ namespace RestSharpManager
 
         #endregion
 
+        public static Action<string> ExternalMessage;
+
         /// <summary>
         ///    API request manager instance
         /// </summary>
-        public static RestSharpManager Current { get; private set; }
+        private static RestSharpManager _instance;
+        public static RestSharpManager Current => _instance ?? (_instance = new RestSharpManager());
 
         public string TokenForAPI { get; set; }
         public string BaseUrl { get; set; }
@@ -47,24 +51,24 @@ namespace RestSharpManager
         /// <summary>
         ///     Retrieving entries from API
         /// </summary>
-        public List<Entry> RetrieveEntries()
-        {
-            var ListOfEntries = new List<Entry>();
-            //REST request
-            var response = RestAction(Method.GET, Route.RetrieveEntries);
-            if (!ValidateResponse(response)) return ListOfEntries;
+        //public List<Entry> RetrieveEntries()
+        //{
+        //    var ListOfEntries = new List<Entry>();
+        //    //REST request
+        //    var response = RestAction(Method.GET, Route.RetrieveEntries);
+        //    if (!ValidateResponse(response)) return ListOfEntries;
 
-            try
-            {
-                //Deserializing JSON
-                ListOfEntries = JsonConvert.DeserializeObject<List<Entry>>(response.Content);
-            }
-            catch (Exception e)
-            {
-            }
-            IsLastRequestWasSuccessful = true;
-            return ListOfEntries;
-        }
+        //    try
+        //    {
+        //        //Deserializing JSON
+        //        ListOfEntries = JsonConvert.DeserializeObject<List<Entry>>(response.Content);
+        //    }
+        //    catch (Exception e)
+        //    {
+        //    }
+        //    IsLastRequestWasSuccessful = true;
+        //    return ListOfEntries;
+        //}
 
         /// <summary>
         ///   Validating respond for an errors
@@ -129,42 +133,32 @@ namespace RestSharpManager
 
         #region New manager starting
 
-        public static void Start()
+
+        public void ClearServerData(string ServerAddress)
         {
-            Current = null;
-
-            if (!ValidateExportSettings())
-                return;
-
-            Init();
-        }
-
-        private static bool ValidateExportSettings()
-        {
-            return true;
-        }
-
-        private static void Init()
-        {
-            //new manager initialization
-            Current = new RestSharpManager();
-            SetProxy();
-        }
-
-        /// <summary>
-        ///   Setting system proxy by default
-        /// </summary>
-        public static void SetProxy()
-        {
+            
+            ServerAddress = ServerAddress.TrimEnd('/');
+            restRequest = new RestRequest(Method.GET);
+            restClient.BaseUrl = new Uri(ServerAddress + @"/clear");
+            ExternalMessage.Invoke($"Trying to connect to :{restClient.BaseUrl}");
+            var restResponse = restClient.Execute(restRequest);
             try
             {
-                restClient.Proxy = WebRequest.GetSystemWebProxy();
-                restClient.Proxy.Credentials = CredentialCache.DefaultNetworkCredentials;
+                //Deserializing JSON
+                var a = JsonConvert.DeserializeObject<ClearDto>(restResponse.Content);
+                ExternalMessage.Invoke($"CLEAR SUCCESSFUL: status — {a.status}, response — {a.response}");
             }
-            catch (Exception)
+            catch (Exception e)
             {
+                ExternalMessage.Invoke(e.Message);
+
             }
+
+            
+
         }
+
+        //ExternalMessage.Invoke("555");
 
         #endregion
     }
