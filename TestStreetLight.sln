@@ -13,6 +13,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StreetLightManager", "Stree
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RestSharpManager", "RestSharpManager\RestSharpManager.csproj", "{FF2BB57F-B50C-41CF-8913-C1A01194E29D}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StreetlightAnalysisServer", "StreetlightAnalysisServer\StreetlightAnalysisServer.csproj", "{7EA95E8C-1746-4876-B88A-4ADEB3B157CA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StreetlightExchange", "StreetlightExchange\StreetlightExchange.csproj", "{4D35852D-390D-4BFA-BF22-E920355135F8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +43,14 @@ Global
 		{FF2BB57F-B50C-41CF-8913-C1A01194E29D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FF2BB57F-B50C-41CF-8913-C1A01194E29D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FF2BB57F-B50C-41CF-8913-C1A01194E29D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7EA95E8C-1746-4876-B88A-4ADEB3B157CA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7EA95E8C-1746-4876-B88A-4ADEB3B157CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7EA95E8C-1746-4876-B88A-4ADEB3B157CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7EA95E8C-1746-4876-B88A-4ADEB3B157CA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4D35852D-390D-4BFA-BF22-E920355135F8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4D35852D-390D-4BFA-BF22-E920355135F8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4D35852D-390D-4BFA-BF22-E920355135F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4D35852D-390D-4BFA-BF22-E920355135F8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
