@@ -12,11 +12,11 @@ namespace Streetlight
 
         public StreetlightMalfunction(int initialNumber) : base(initialNumber)
         {
-            var numberOfBadSegments = new Random().Next(1) + 1;
+            var numberOfBadSegments = new Random().Next(2)+1;
             var previousBadSegmentIndex = 0;
             
             byte badSegmentIndex = 0;
-            for (int i = 0; i < numberOfBadSegments; i++)
+            for (int i = 1; i <= numberOfBadSegments; i++)
             {
                 if (i == 0)
                 {
