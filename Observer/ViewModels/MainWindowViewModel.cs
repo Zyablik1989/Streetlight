@@ -9,6 +9,8 @@ namespace Observer.ViewModels
 {
     public class MainWindowViewModel : ObservableObject
     {
+        bool isInvokingNewStreetlightInProgress = false;
+
         private int streetlightSecondsLeft;
 
         public int StreetlightSecondsLeft
@@ -82,10 +84,35 @@ namespace Observer.ViewModels
             }
         }
 
+        public RelayCommand InvokeNewStreetlightCommand { get; set; }
 
         public MainWindowViewModel()
         {
-                       
+            InvokeNewStreetlightCommand = new RelayCommand(async o => { await ExecuteInvokeNewStreetlight(); },
+                o => CanExecuteInvokeNewStreetlight());
+        }
+
+        private async Task ExecuteInvokeNewStreetlight()
+        {
+            lock (this)
+            {
+                isInvokingNewStreetlightInProgress = true;
+            }
+            StreetLightManager.StreetlightManager.InvokeNewStreetlight();
+            UpdateUI();
+            lock (this)
+            {
+                isInvokingNewStreetlightInProgress = false;
+            }
+        }
+
+        private bool CanExecuteInvokeNewStreetlight()
+        {
+            if (isInvokingNewStreetlightInProgress)
+            {
+                return false;
+            }
+            return true;
         }
 
         internal void UpdateUI()

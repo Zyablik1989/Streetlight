@@ -34,9 +34,12 @@ namespace StreetLightManager
         {
             if (streetlight == null) { return null; }
 
-            switch (streetlight.GetType()) 
+            switch (streetlight.GetType().Name)
             {
-                default: return "Default";
+                case "StreetlightIdleWhileRed": return "No CountDown while Red";
+                case "StreetlightDualDigits": return "With dual Digits";
+                case "StreetlightMalfunction": return "Bad segments";
+                    default: return "Default";
             }
 
         }

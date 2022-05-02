@@ -21,7 +21,7 @@ namespace Streetlight
                     return new StreetlightDualDigits(initialNumber);
 
                 case StreetlightSubtypesEnum.Malfunction:
-                    return new StreetlightDefault(initialNumber);
+                    return new StreetlightMalfunction(initialNumber);
 
                 case StreetlightSubtypesEnum.IdleWhileRed:
                     return new StreetlightIdleWhileRed(initialNumber);
