@@ -21,26 +21,6 @@ namespace Observer.ViewModels
                 }
 
                 OnPropertyChanged();
-
-                if (StreetLightManager.StreetLightManager.DigitsSegmentsScheme.Count > 1)
-                {
-                    LeftDigit = StreetLightManager.StreetLightManager.DigitsSegmentsScheme[0];
-                    RightDigit = StreetLightManager.StreetLightManager.DigitsSegmentsScheme[1];
-                }
-                else if (StreetLightManager.StreetLightManager.DigitsSegmentsScheme.Count > 0)
-                {
-                    LeftDigit = null;
-                    RightDigit = StreetLightManager.StreetLightManager.DigitsSegmentsScheme[0]; 
-                }
-                else
-                {
-                    LeftDigit = null;
-                    RightDigit = null;
-                }
-                
-
-              
-
             }
         }
 
@@ -78,22 +58,69 @@ namespace Observer.ViewModels
             }
         }
 
+        private string subtype;
+
+        public string Subtype
+        {
+            get { return subtype; }
+            set
+            {
+                subtype = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private int initialNumber;
+
+        public int InitialNumber
+        {
+            get { return initialNumber; }
+            set
+            {
+                initialNumber = value;
+                OnPropertyChanged();
+            }
+        }
+
 
         public MainWindowViewModel()
         {
                        
         }
 
+        internal void UpdateUI()
+        {
+            StreetlightSecondsLeft = StreetLightManager.StreetlightManager.SecondsLeft;
+            IsLightGreen = StreetLightManager.StreetlightManager.LightIsGreen;
 
+            if (StreetLightManager.StreetlightManager.DigitsSegmentsScheme.Count > 1)
+            {
+                LeftDigit = StreetLightManager.StreetlightManager.DigitsSegmentsScheme[0];
+                RightDigit = StreetLightManager.StreetlightManager.DigitsSegmentsScheme[1];
+            }
+            else if (StreetLightManager.StreetlightManager.DigitsSegmentsScheme.Count > 0)
+            {
+                LeftDigit = null;
+                RightDigit = StreetLightManager.StreetlightManager.DigitsSegmentsScheme[0];
+            }
+            else
+            {
+                LeftDigit = null;
+                RightDigit = null;
+            }
+
+            Subtype = StreetLightManager.StreetlightManager.GetSubtypeOfStreetlight();
+            InitialNumber = StreetLightManager.StreetlightManager.GetInitialNumberOfStreetlight();
+        }
 
         public void UpdateDigitsSegments()
         {
-            StreetlightSecondsLeft = StreetLightManager.StreetLightManager.SecondsLeft;
+            UpdateUI();
         }
 
         public void UpdateColor()
         {
-            IsLightGreen = StreetLightManager.StreetLightManager.LightIsGreen;
+            UpdateUI();
         }
 
 

@@ -9,13 +9,19 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Streetlight", "Streetlight\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Observer", "Observer\Observer.csproj", "{157E5DD4-69CF-4AD6-94A4-E23C2E9B7126}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StreetLightManager", "StreetLightManager\StreetLightManager.csproj", "{6F260CCC-2C90-492C-9EDD-E3BBB97C7AE1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StreetlightManager", "StreetLightManager\StreetlightManager.csproj", "{6F260CCC-2C90-492C-9EDD-E3BBB97C7AE1}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RestSharpManager", "RestSharpManager\RestSharpManager.csproj", "{FF2BB57F-B50C-41CF-8913-C1A01194E29D}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StreetlightAnalysisServer", "StreetlightAnalysisServer\StreetlightAnalysisServer.csproj", "{7EA95E8C-1746-4876-B88A-4ADEB3B157CA}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StreetlightExchange", "StreetlightExchange\StreetlightExchange.csproj", "{4D35852D-390D-4BFA-BF22-E920355135F8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StreetlightAnalysisManager", "StreetlightAnalysisManager\StreetlightAnalysisManager.csproj", "{F8F91FC6-F7F1-4937-9516-AC7DD4925EDC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ClientSide", "ClientSide", "{B9CC42A7-9288-433B-9219-F3ADE0598051}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ServerSide", "ServerSide", "{EF59CC0D-BEFF-449D-9E00-97B3BA061F23}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,9 +57,21 @@ Global
 		{4D35852D-390D-4BFA-BF22-E920355135F8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4D35852D-390D-4BFA-BF22-E920355135F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4D35852D-390D-4BFA-BF22-E920355135F8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F8F91FC6-F7F1-4937-9516-AC7DD4925EDC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F8F91FC6-F7F1-4937-9516-AC7DD4925EDC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F8F91FC6-F7F1-4937-9516-AC7DD4925EDC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F8F91FC6-F7F1-4937-9516-AC7DD4925EDC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{89E648EC-3E55-4437-BF7F-42F8689EA29A} = {B9CC42A7-9288-433B-9219-F3ADE0598051}
+		{157E5DD4-69CF-4AD6-94A4-E23C2E9B7126} = {B9CC42A7-9288-433B-9219-F3ADE0598051}
+		{6F260CCC-2C90-492C-9EDD-E3BBB97C7AE1} = {B9CC42A7-9288-433B-9219-F3ADE0598051}
+		{FF2BB57F-B50C-41CF-8913-C1A01194E29D} = {B9CC42A7-9288-433B-9219-F3ADE0598051}
+		{7EA95E8C-1746-4876-B88A-4ADEB3B157CA} = {EF59CC0D-BEFF-449D-9E00-97B3BA061F23}
+		{F8F91FC6-F7F1-4937-9516-AC7DD4925EDC} = {EF59CC0D-BEFF-449D-9E00-97B3BA061F23}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {42FBF951-52D1-44C3-A212-958DCEEF8D5D}

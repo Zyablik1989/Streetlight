@@ -18,7 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\StreetLightManager\StreetLightManager.csproj" />
+    <ProjectReference Include="..\StreetLightManager\StreetlightManager.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,4 +1,4 @@
-﻿namespace StreetlightAnalysisServer.Controllers
+﻿namespace StreetlightExchange
 {
     public class Status
     {

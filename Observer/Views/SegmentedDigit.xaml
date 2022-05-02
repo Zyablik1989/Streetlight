@@ -10,7 +10,7 @@
     <UserControl.Resources>
         <converters:VisibilityConverter x:Key="VisibilityConverter" />
     </UserControl.Resources>
-    <Grid Background="LightGray">
+    <Grid >
         <Grid HorizontalAlignment="Center" Height="200" VerticalAlignment="Center" Width="100">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1*"/>

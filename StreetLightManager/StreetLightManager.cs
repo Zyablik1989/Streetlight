@@ -9,7 +9,7 @@ using Streetlight;
 
 namespace StreetLightManager
 {
-    public class StreetLightManager
+    public class StreetlightManager
     {
         private static readonly object Sync = new object();
         protected static bool? lightIsGreen;
@@ -25,12 +25,28 @@ namespace StreetLightManager
 
         public static List<byte> DigitsSegmentsScheme = new List<byte>();
 
+        public static int GetInitialNumberOfStreetlight()
+        {
+            return streetlight?.InitialNumber ?? 0;
+        }
+
+        public static string GetSubtypeOfStreetlight()
+        {
+            if (streetlight == null) { return null; }
+
+            switch (streetlight.GetType()) 
+            {
+                default: return "Default";
+            }
+
+        }
+
         public static int SecondsLeft { get; set; } = 1;
 
-        public static StreetLightManager Current { get; private set; }
+        public static StreetlightManager Current { get; private set; }
         public static void Start()
         {
-            Current = new StreetLightManager();
+            Current = new StreetlightManager();
 
             bw = new BackgroundWorker();
             bw.DoWork += CountDown;

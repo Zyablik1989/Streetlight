@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace StreetlightAnalysisServer
+namespace StreetlightExchange
 {
     public class SequenceResponse
     {

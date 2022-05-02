@@ -27,8 +27,8 @@ namespace Observer.Views
         {
             InitializeComponent();
             DataContext = new MainWindowViewModel();
-            StreetLightManager.StreetLightManager.Start();
-            StreetLightManager.StreetLightManager.DigitsChanged += async () =>
+            StreetLightManager.StreetlightManager.Start();
+            StreetLightManager.StreetlightManager.DigitsChanged += async () =>
             {
                 await Dispatcher.BeginInvoke(new ThreadStart(delegate
                 {
@@ -37,7 +37,7 @@ namespace Observer.Views
                 
             };
 
-            StreetLightManager.StreetLightManager.ColorChanged += async () =>
+            StreetLightManager.StreetlightManager.ColorChanged += async () =>
             {
                 await Dispatcher.BeginInvoke(new ThreadStart(delegate
                 {
