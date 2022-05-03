@@ -4,6 +4,6 @@ namespace StreetlightExchange
 {
     public class SequenceResponse
     {
-        public Guid sequence;
+        public string sequence;
     }
 }

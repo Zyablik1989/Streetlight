@@ -10,5 +10,6 @@ namespace StreetlightExchange
     {
         public Observation observation;
         public string sequence;
+
     }
 }

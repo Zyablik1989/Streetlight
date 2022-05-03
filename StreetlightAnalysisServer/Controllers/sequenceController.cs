@@ -17,35 +17,11 @@ namespace StreetlightAnalysisServer.Controllers
                 status = Status.Ok,
                 response = new SequenceResponse()
                 {
-                    sequence = System.Guid.NewGuid()
+
+                    sequence = System.Guid.NewGuid().ToString(),
                 }
 
             };
         }
-
-        // GET api/<StreetlightReport>/5
-        //[HttpGet("{id}")]
-        //public string Get(int id)
-        //{
-        //    return "value";
-        //}
-
-        //// POST api/<StreetlightReport>
-        //[HttpPost]
-        //public void Post([FromBody] string value)
-        //{
-        //}
-
-        //// PUT api/<StreetlightReport>/5
-        //[HttpPut("{id}")]
-        //public void Put(int id, [FromBody] string value)
-        //{
-        //}
-
-        //// DELETE api/<StreetlightReport>/5
-        //[HttpDelete("{id}")]
-        //public void Delete(int id)
-        //{
-        //}
     }
 }

@@ -9,37 +9,17 @@ namespace StreetlightAnalysisServer.Controllers
     {
         // GET: <observationController>/add
         [HttpPost]
-        public ObservationResponse add(ObservationRequest request)
+        public ObservationDto add(ObservationRequest request)
         {
-            return new ObservationResponse()
+            return new ObservationDto()
             {
-
+                 status = Status.Ok,
+                 response = new ObservationResponse()
+                 {
+                      start = new int[] {1,3},
+                       missing = new string[] {"0011100","1100010"}
+                 }
             };
         }
-
-        //// GET api/<observationController>/5
-        //[HttpGet("{id}")]
-        //public string Get(int id)
-        //{
-        //    return "value";
-        //}
-
-        //// POST api/<observationController>
-        //[HttpPost]
-        //public void Post([FromBody] string value)
-        //{
-        //}
-
-        //// PUT api/<observationController>/5
-        //[HttpPut("{id}")]
-        //public void Put(int id, [FromBody] string value)
-        //{
-        //}
-
-        //// DELETE api/<observationController>/5
-        //[HttpDelete("{id}")]
-        //public void Delete(int id)
-        //{
-        //}
     }
 }

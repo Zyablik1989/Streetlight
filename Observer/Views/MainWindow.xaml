@@ -92,7 +92,7 @@
                 <Button Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center" Content="CONNECT" Command="{Binding ConnectToAnalisysServerCommand}"/>
                 <Button Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Center" Content="CLEAR" Command="{Binding OrderToClearAnalisysServerCommand}"/>
                 <Button Grid.Column="4" VerticalAlignment="Center" HorizontalAlignment="Center" Content="CANCEL" Command="{Binding CancelCommand}"/> 
-                <ListBox Grid.Row="1" Grid.ColumnSpan="4" ItemsSource="{Binding ServerMessages}"/>
+                <ListBox x:Name="ServerMessages" Grid.Row="1" Grid.ColumnSpan="4" ItemsSource="{Binding ServerMessages}" />
 
 
             </Grid>

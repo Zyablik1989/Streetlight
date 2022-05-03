@@ -34,7 +34,6 @@ namespace Observer.Views
                 {
                     (DataContext as MainWindowViewModel)?.UpdateDigitsSegments();
                 }));
-                
             };
 
             StreetLightManager.StreetlightManager.ColorChanged += async () =>
@@ -43,7 +42,6 @@ namespace Observer.Views
                 {
                     (DataContext as MainWindowViewModel)?.UpdateColor();
                 }));
-
             };
 
             RestSharpManager.RestSharpManager.ExternalMessage += async (string s) =>
@@ -52,10 +50,12 @@ namespace Observer.Views
                 {
                     (DataContext as MainWindowViewModel)?.AddMessage(s);
                 }));
-
             };
 
-            
+
         }
+
+ 
+        
     }
 }
