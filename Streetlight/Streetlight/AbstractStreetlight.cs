@@ -3,11 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Streetlight.Interfaces;
 
 namespace Streetlight
 {
-    public abstract class AbstractStreetlight : INumberToSegmentConvertable
+    public abstract class AbstractStreetlight
     {
         public int InitialNumber { get; set; } = 9;
 

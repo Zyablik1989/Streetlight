@@ -31,7 +31,6 @@
             <Rectangle x:Name="R4" Grid.Column="0" Grid.Row="3" HorizontalAlignment="Stretch" Fill="Black" VerticalAlignment="Stretch"/>
             <Rectangle x:Name="R5" Grid.Column="2" Grid.Row="3" HorizontalAlignment="Stretch" Fill="Black" VerticalAlignment="Stretch"/>
             <Rectangle x:Name="R6" Grid.Column="1" Grid.Row="4" HorizontalAlignment="Stretch" Fill="Black" VerticalAlignment="Stretch"/>
-
         </Grid>
 
     </Grid>

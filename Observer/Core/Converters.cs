@@ -25,12 +25,10 @@ namespace Observer.Core.Converters
                 }
             }
 
-
             public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
             {
                 throw new NotImplementedException();
             }
-        
         }
 
     public class VisibilityConverter : IValueConverter

@@ -128,13 +128,10 @@ namespace Observer.ViewModels
         public RelayCommand InvokeNewStreetlightCommand { get; set; }
 
         
-
         public MainWindowViewModel()
         {
             ServerMessages = new ObservableCollection<string>();
-            InvokeNewStreetlightCommand = new RelayCommand(async o => { await ExecuteInvokeNewStreetlight(); },
-                o => CanExecuteInvokeNewStreetlight());
-
+            InvokeNewStreetlightCommand = new RelayCommand(async o => { await ExecuteInvokeNewStreetlight(); }, o => CanExecuteInvokeNewStreetlight());
             ConnectToAnalisysServerCommand = new RelayCommand(async o => { await ExecuteConnectToAnalisysServer(); });
             OrderToClearAnalisysServerCommand = new RelayCommand(async o => { await ExecuteOrderToClearAnalisysServer(); });
             CancelCommand = new RelayCommand(async o => { await ExecuteCancel(); });
@@ -153,8 +150,11 @@ namespace Observer.ViewModels
             {
                 isInvokingNewStreetlightInProgress = true;
             }
+
             StreetLightManager.StreetlightManager.InvokeNewStreetlight();
+
             UpdateUI();
+
             lock (this)
             {
                 isInvokingNewStreetlightInProgress = false;
@@ -181,8 +181,6 @@ namespace Observer.ViewModels
                 RestSharpManager.RestSharpManager.Current.Cancel();
             });
         }
-
-        
 
         internal void UpdateUI()
         {
@@ -223,7 +221,5 @@ namespace Observer.ViewModels
         {
             ServerMessages.Add(message);
         }
-
-
     }
 }

@@ -41,7 +41,6 @@ namespace StreetLightManager
                 case "StreetlightMalfunction": return "Bad segments";
                     default: return "Default";
             }
-
         }
 
         public static int SecondsLeft { get; set; } = 1;
@@ -69,17 +68,13 @@ namespace StreetLightManager
                 streetlight = StreetlightFactory.CreateStreetlight();
                 SecondsLeft = streetlight.InitialNumber;
                 LightIsGreen = false;
-
             }
-            
-
         }
 
         private static void CountDown(object sender, DoWorkEventArgs e)
         {
-            Task result = WaitTimeout();
+            WaitTimeout();
         }
-
 
         private static async Task WaitTimeout()
         {
@@ -108,11 +103,7 @@ namespace StreetLightManager
                     DigitsChanged?.Invoke();
                 }
 
-                await Task.Run(
-                             () =>
-                             {
-                                 Thread.Sleep(1000);
-                             });
+                await Task.Run(() => { Thread.Sleep(1000); });
             }
         }
     }

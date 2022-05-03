@@ -15,51 +15,21 @@ namespace RestSharpManager
 {
     public class RestSharpManager
     {
+        private static bool _isConnectionInProcess;
 
         public static Action<string> ExternalMessage;
-
-        private static bool IsConnectionInProcess;
-
-        private static RestSharpManager _instance;
-        public static RestSharpManager Current => _instance ?? (_instance = new RestSharpManager());
 
         public static ObserverJobsEnum Job = ObserverJobsEnum.Idle;
         public static string ConnectionString;
         public static string SequenceCode;
-        
+
+        private static RestSharpManager _instance;
+        public static RestSharpManager Current => _instance ?? (_instance = new RestSharpManager());
+
         private static readonly RestClient restClient = new RestClient();
         private static RestRequest restRequest = new RestRequest();
 
         public static BackgroundWorker bw = new BackgroundWorker();
-
-
-        /// <summary>
-        ///     Retrieving entries from API
-        /// </summary>
-        //public List<Entry> RetrieveEntries()
-        //{
-        //    var ListOfEntries = new List<Entry>();
-        //    //REST request
-        //    var response = RestAction(Method.GET, Route.RetrieveEntries);
-        //    if (!ValidateResponse(response)) return ListOfEntries;
-
-        //    try
-        //    {
-        //        //Deserializing JSON
-        //        ListOfEntries = JsonConvert.DeserializeObject<List<Entry>>(response.Content);
-        //    }
-        //    catch (Exception e)
-        //    {
-        //    }
-        //    IsLastRequestWasSuccessful = true;
-        //    return ListOfEntries;
-        //}
-
-        /// <summary>
-        ///   Validating respond for an errors
-        /// </summary>
-        /// <param name="response"></param>
-        /// <returns></returns>
         private static bool ValidateResponse(IRestResponse response)
         {
             if (response == null) return false;
@@ -69,52 +39,6 @@ namespace RestSharpManager
             return true;
         }
 
-
-
-        /// <summary>
-        ///    Direct API manipulation via RestSharp
-        /// </summary>
-        /// <param name="method"></param>
-        /// <param name="route"></param>
-        /// <returns></returns>
-        //public IRestResponse RestAction(Method method, Route route)
-        //{
-        //    //New request each time.
-        //    restRequest = new RestRequest(method);
-
-        //    var routeString = string.Empty;
-
-        //    switch (route)
-        //    {
-        //        //Setting target routing 
-        //        case Route.RetrieveEntries:
-        //            routeString = "api/news/get?count=20&page=1";
-        //            break;
-        //        default:
-
-        //            return null;
-        //    }
-
-        //    //Connection string
-        //    restClient.BaseUrl = new Uri(BaseUrl + "/" + routeString);
-        //    restClient.RemoteCertificateValidationCallback = (sender, certificate, chain, sslPolicyErrors) => true;
-        //    //Universal headers
-        //    //restRequest.AddHeader("Authorization", "Basic " + TokenForAPI);
-        //    restRequest.AddHeader("User_Agent", "News Application");
-        //    restRequest.AddHeader("Accept", "application/json");
-
-        //    restRequest.Timeout = 30 * 1000;
-
-        //    //THE REQUEST
-        //    var restResponse = restClient.Execute(restRequest);
-
-        //    return restResponse;
-        //}
-
-
-
-
-
         public RestSharpManager()
         {
             bw = new BackgroundWorker();
@@ -122,7 +46,10 @@ namespace RestSharpManager
             bw.RunWorkerAsync();
         }
 
-
+        private static void CountDown(object sender, DoWorkEventArgs e)
+        {
+            Current.WaitTimeout();
+        }
 
         public void ClearServerData(string ServerAddress)
         {
@@ -144,7 +71,6 @@ namespace RestSharpManager
                 Job = ObserverJobsEnum.Cancel;
                 ExternalMessage?.Invoke("Job started: Cancel");
             }
-            
         }
 
         public async Task RetrieveSequence(string ServerAddress)
@@ -185,9 +111,7 @@ namespace RestSharpManager
             catch (Exception e)
             {
                 ExternalMessage?.Invoke(e.Message);
-
             }
-
         }
 
         public async Task SendCurrentSegmentsScheme(string ServerAddress)
@@ -230,7 +154,6 @@ namespace RestSharpManager
                         
                         ExternalMessage?.Invoke($"SUCCESSFUL SENDING: presumed numbers — {numbers}");
                         ExternalMessage?.Invoke($"SUCCESSFUL SENDING: missing segments — {missing}");
-                        
                     }
                     else
                     {
@@ -238,7 +161,6 @@ namespace RestSharpManager
                         ExternalMessage?.Invoke($"message — {response.msg}");
                         Job = ObserverJobsEnum.Cancel;
                     }
-
                 }
             }
             catch (Exception e)
@@ -246,17 +168,14 @@ namespace RestSharpManager
                 ExternalMessage?.Invoke(e.Message);
                 Job = ObserverJobsEnum.Cancel;
             }
-            
-
         }
 
         private async Task ClearServerDataJob(string ServerAddress)
         {
-            
             ServerAddress = ServerAddress.TrimEnd('/');
             restRequest = new RestRequest(Method.GET);
             restClient.BaseUrl = new Uri(ServerAddress + @"/clear");
-                        ExternalMessage?.Invoke($"CLEARING SERVER DATA");
+            ExternalMessage?.Invoke($"CLEARING SERVER DATA");
             ExternalMessage?.Invoke($"Trying to connect to :{restClient.BaseUrl}");
 
             var restResponse = await restClient.ExecuteAsync(restRequest);
@@ -267,7 +186,7 @@ namespace RestSharpManager
                 ExternalMessage?.Invoke($"Server Answer ({restResponse.StatusCode}) {restResponse.ErrorMessage}");
                 return;
             }
-                try
+            try
             {
                 //Deserializing JSON
                 var response = JsonConvert.DeserializeObject<ClearDto>(restResponse.Content);
@@ -279,22 +198,15 @@ namespace RestSharpManager
             catch (Exception e)
             {
                 ExternalMessage?.Invoke(e.Message);
-
             }
-
-
         }
 
-        private static void CountDown(object sender, DoWorkEventArgs e)
-        {
-            Current.WaitTimeout();
-        }
 
         private async Task WaitTimeout()
         {
             while (true)
             {
-                if (IsConnectionInProcess)
+                if (_isConnectionInProcess)
                 {
                     if (Job == ObserverJobsEnum.Cancel)
                     {
@@ -310,40 +222,31 @@ namespace RestSharpManager
                     ExternalMessage?.Invoke("CANCELED.");
                 }
 
-                await Task.Run(
-                    () =>
-                    {
-                        Thread.Sleep(500);
-                    });
+                await Task.Run(() => { Thread.Sleep(500); });
 
                 switch (Job)
                 {
                     case ObserverJobsEnum.GetSequenceCode:
                         Job = ObserverJobsEnum.SendSegmentsScheme;
-                        lock (Current) { IsConnectionInProcess = true; }
+                        lock (Current) { _isConnectionInProcess = true; }
                         await RetrieveSequence(ConnectionString).ConfigureAwait(false);
-                        lock (Current) { IsConnectionInProcess = false; }
+                        lock (Current) { _isConnectionInProcess = false; }
                         //
                         break;
                     case ObserverJobsEnum.SendSegmentsScheme:
-                        lock (Current) { IsConnectionInProcess = true; }
+                        lock (Current) { _isConnectionInProcess = true; }
                         await SendCurrentSegmentsScheme(ConnectionString).ConfigureAwait(false);
-                        lock (Current) { IsConnectionInProcess = false; }
+                        lock (Current) { _isConnectionInProcess = false; }
                         break;
                     case ObserverJobsEnum.ClearServerData:
                         Job = ObserverJobsEnum.Idle;
-                        lock (Current) { IsConnectionInProcess = true; }
+                        lock (Current) { _isConnectionInProcess = true; }
                         await ClearServerDataJob(ConnectionString).ConfigureAwait(false);
-                        lock (Current) { IsConnectionInProcess = false; }
+                        lock (Current) { _isConnectionInProcess = false; }
                         break;
                 }
 
-
-                await Task.Run(
-                    () =>
-                    {
-                        Thread.Sleep(500);
-                    });
+                await Task.Run(() => { Thread.Sleep(500); });
             }
         }
 

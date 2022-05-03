@@ -26,7 +26,7 @@ namespace Observer.Views
         public MainWindow()
         {
             InitializeComponent();
-            //DataContext = new MainWindowViewModel();
+
             StreetLightManager.StreetlightManager.Start();
             StreetLightManager.StreetlightManager.DigitsChanged += async () =>
             {
@@ -51,11 +51,6 @@ namespace Observer.Views
                     (DataContext as MainWindowViewModel)?.AddMessage(s);
                 }));
             };
-
-
         }
-
- 
-        
     }
 }

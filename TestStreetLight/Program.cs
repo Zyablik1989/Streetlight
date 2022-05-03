@@ -12,7 +12,7 @@ namespace TestStreetLight
             while (true)
             {
                 var Streetlight = StreetlightFactory.CreateStreetlight();
-                //Console.WriteLine(Streetlight.SecondsLeft);
+                
                 var scheme = Streetlight.DigitsSegmentsScheme;
                 DrawSegments(scheme);
                 Console.ReadKey();

@@ -3,21 +3,19 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.1.32328.378
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestStreetLight", "TestStreetLight\TestStreetLight.csproj", "{5317CD29-CAD7-4FD5-B16E-6EDCFE75B68E}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Streetlight", "Streetlight\Streetlight.csproj", "{89E648EC-3E55-4437-BF7F-42F8689EA29A}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Observer", "Observer\Observer.csproj", "{157E5DD4-69CF-4AD6-94A4-E23C2E9B7126}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StreetlightManager", "StreetLightManager\StreetlightManager.csproj", "{6F260CCC-2C90-492C-9EDD-E3BBB97C7AE1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RestSharpManager", "RestSharpManager\RestSharpManager.csproj", "{FF2BB57F-B50C-41CF-8913-C1A01194E29D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RestSharpManager", "RestSharpManager\RestSharpManager.csproj", "{FF2BB57F-B50C-41CF-8913-C1A01194E29D}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StreetlightAnalysisServer", "StreetlightAnalysisServer\StreetlightAnalysisServer.csproj", "{7EA95E8C-1746-4876-B88A-4ADEB3B157CA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StreetlightExchange", "StreetlightExchange\StreetlightExchange.csproj", "{4D35852D-390D-4BFA-BF22-E920355135F8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StreetlightExchange", "StreetlightExchange\StreetlightExchange.csproj", "{4D35852D-390D-4BFA-BF22-E920355135F8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StreetlightAnalysisManager", "StreetlightAnalysisManager\StreetlightAnalysisManager.csproj", "{F8F91FC6-F7F1-4937-9516-AC7DD4925EDC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StreetlightAnalysisManager", "StreetlightAnalysisManager\StreetlightAnalysisManager.csproj", "{F8F91FC6-F7F1-4937-9516-AC7DD4925EDC}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ClientSide", "ClientSide", "{B9CC42A7-9288-433B-9219-F3ADE0598051}"
 EndProject
@@ -29,10 +27,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{5317CD29-CAD7-4FD5-B16E-6EDCFE75B68E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5317CD29-CAD7-4FD5-B16E-6EDCFE75B68E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5317CD29-CAD7-4FD5-B16E-6EDCFE75B68E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5317CD29-CAD7-4FD5-B16E-6EDCFE75B68E}.Release|Any CPU.Build.0 = Release|Any CPU
 		{89E648EC-3E55-4437-BF7F-42F8689EA29A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{89E648EC-3E55-4437-BF7F-42F8689EA29A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{89E648EC-3E55-4437-BF7F-42F8689EA29A}.Release|Any CPU.ActiveCfg = Release|Any CPU
