@@ -79,8 +79,9 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1*"/>
                 <ColumnDefinition Width="0.7*"/>
-                <ColumnDefinition Width="0.3*"/>
-                <ColumnDefinition Width="0.3*"/>
+                <ColumnDefinition Width="0.23*"/>
+                <ColumnDefinition Width="0.16*"/>
+                    <ColumnDefinition Width="0.21*"/>
                 </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="1*"/>
@@ -90,6 +91,7 @@
                 <TextBox Grid.Column="1" VerticalAlignment="Center" Text="{Binding ServerAddress, FallbackValue='http://localhost:5000', TargetNullValue='http://localhost:5000'}" HorizontalAlignment="Stretch"/>
                 <Button Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center" Content="CONNECT" Command="{Binding ConnectToAnalisysServerCommand}"/>
                 <Button Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Center" Content="CLEAR" Command="{Binding OrderToClearAnalisysServerCommand}"/>
+                <Button Grid.Column="4" VerticalAlignment="Center" HorizontalAlignment="Center" Content="CANCEL" Command="{Binding CancelCommand}"/> 
                 <ListBox Grid.Row="1" Grid.ColumnSpan="4" ItemsSource="{Binding ServerMessages}"/>
 
 

@@ -77,11 +77,11 @@ namespace StreetLightManager
 
         private static void CountDown(object sender, DoWorkEventArgs e)
         {
-            Task result = WaitTimeoutBeforeNextRequest();
+            Task result = WaitTimeout();
         }
 
 
-        private static async Task WaitTimeoutBeforeNextRequest()
+        private static async Task WaitTimeout()
         {
             while (true)
             {

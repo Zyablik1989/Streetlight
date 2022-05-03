@@ -122,8 +122,12 @@ namespace Observer.ViewModels
         public RelayCommand ConnectToAnalisysServerCommand { get; set; }
 
         public RelayCommand OrderToClearAnalisysServerCommand { get; set; }
-        
+
+        public RelayCommand CancelCommand { get; set; }
+
         public RelayCommand InvokeNewStreetlightCommand { get; set; }
+
+        
 
         public MainWindowViewModel()
         {
@@ -133,6 +137,7 @@ namespace Observer.ViewModels
 
             ConnectToAnalisysServerCommand = new RelayCommand(async o => { await ExecuteConnectToAnalisysServer(); });
             OrderToClearAnalisysServerCommand = new RelayCommand(async o => { await ExecuteOrderToClearAnalisysServer(); });
+            CancelCommand = new RelayCommand(async o => { await ExecuteCancel(); });
         }
         private bool CanExecuteInvokeNewStreetlight()
         {
@@ -158,36 +163,25 @@ namespace Observer.ViewModels
 
         private async Task ExecuteConnectToAnalisysServer()
         {
-            
-
-            ServerMessages.Add("777");
-                await Task.Run(
-                             () =>
-                             {
-                                 Thread.Sleep(500);
-                             });
-                ServerMessages.Add("666");
-            await Task.Run(
-                 () =>
-                 {
-                     Thread.Sleep(100);
-                 });
-
-
+           await Task.Run(() =>{
+               RestSharpManager.RestSharpManager.Current.SendStreetlightData(ServerAddress);
+           });
         }
 
         private async Task ExecuteOrderToClearAnalisysServer()
         {
-            await Task.Run(
-                 () =>
-                 {
-                     RestSharpManager.RestSharpManager.Current.ClearServerData(ServerAddress);
-
-                 });
-            //ServerMessages.Clear();
-
-
+            await Task.Run(() => {
+                RestSharpManager.RestSharpManager.Current.ClearServerData(ServerAddress);
+            });
         }
+
+        private async Task ExecuteCancel()
+        {
+            await Task.Run(() => {
+                RestSharpManager.RestSharpManager.Current.Cancel();
+            });
+        }
+
         
 
         internal void UpdateUI()
